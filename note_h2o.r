@@ -45,3 +45,20 @@ library(caret)
 res[1, 1] <- round(h2o.confusionMatrix(yhat_train, y_train)$overall[1], 4)
 res[1, 2] <- round(h2o.confusionMatrix(yhat_test, y_test)$overall[1], 4)
 print(res)
+
+
+##===============Another example==================##
+# https://blog.csdn.net/sinat_26917383/article/details/51219025 
+#参考来自：h2o官方手册,h2o.deeplearning函数的示例
+library(h2o)
+h2o.init()
+iris.hex <- as.h2o(iris)
+
+## iris.dl <- h2o.deeplearning(x = 1:4, y = 6, training_frame = iris.hex)  #模型拟合,##ERRROR: response variable index 6 is out of range!! 
+iris.dl <- h2o.deeplearning(x = 1:4, y = 5, training_frame = iris.hex)  #模型拟合
+# now make a prediction
+predictions <- h2o.predict(iris.dl, iris.hex)          #预测
+as.data.frame(predictions)                             #预测数据变成数据框
+
+performance = h2o.performance(model = iris.dl)
+print(performance)

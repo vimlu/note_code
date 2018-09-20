@@ -42,9 +42,20 @@ count=0
 while(abs(alter)>0.03 && count<20){
   
 	#训练网络，n.neurons表示输入的参数，以及隐藏层个数，及输出结果
-  net<-newff(n.neurons = c(10,10,2,1),learning.rate.global=1e-4, momentum.global=0.05,error.criterium="LMS", Stao=NA, hidden.layer="tansig", output.layer="purelin", method="ADAPTgdwm")
+  net<-newff(n.neurons = c(10,10,2,1),
+	     learning.rate.global=1e-4, 
+	     momentum.global=0.05,
+	     error.criterium="LMS", 
+	     Stao=NA, 
+	     hidden.layer="tansig", 
+	     output.layer="purelin", 
+	     method="ADAPTgdwm")
   #<span style="line-height: 27.2px; font-family: 'Helvetica Neue', Helvetica, Tahoma, Arial, STXihei, 'Microsoft YaHei', 微软雅黑, sans-serif;">p0[1:8,]表示输入，t0[1:8]表示输出，show.step表示循环次数，n.shows表示满足结果的报告次数</span>
-  result<-train(net,p0[1:8,],t0[1:8],error.criterium="LMS", report=TRUE, show.step=10000, n.shows=5)
+  result<-train(net,p0[1:8,],t0[1:8],
+		error.criterium="LMS", 
+		report=TRUE, 
+		show.step=10000, 
+		n.shows=5)
   #测试第9行到11行
   y<-sim(result$net,p0[9:11,])
   #反归一化

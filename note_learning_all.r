@@ -95,12 +95,14 @@ summary(lm.sol)
 
 ## pheatmap for phynogenetic tree
 require(pheatmap)
-read.table("clipboard", header = T, sep="\t")->P025
+#read.table("clipboard", header = T, sep="\t")->P025
+#P025[,1]->P025_rowname
+#P025[,-1]->P025
+#as.matrix(P025)->P025
+#rownames(P025)<-P025_rowname
 
-P025[,1]->P025_rowname
-P025[,-1]->P025
-as.matrix(P025)->P025
-rownames(P025)<-P025_rowname
+## read the data with first column as rowname!!
+read.table("clipboard", header = T, row.names = 1, na.strings = 'NA')->P025
 pheatmap(P025, color = colorRampPalette( c("white", "red", "darkred"))(200),display_numbers = T, number_format = "%.2f", cluster_rows = F, cluster_cols = F)
 
 windowsFonts(Times=windowsFont("Times New Roman"))
